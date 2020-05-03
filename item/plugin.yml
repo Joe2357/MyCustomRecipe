@@ -1,0 +1,6 @@
+name: "MyCustomRecipe"
+version: 1.0
+author: Joe2357
+description: "Using only my wild survival, make my custom item"
+
+main: mycustomrecipe.Main
