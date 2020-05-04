@@ -1,5 +1,9 @@
 package mycustomrecipe;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,33 +18,87 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Recipe {
 	private final Main CustomRecipe;
+
 	public Recipe(Main instance) {
 		CustomRecipe = instance;
 	}
-	
+
 	List<ShapelessRecipe> shapelessRecipe = new ArrayList<ShapelessRecipe>();
 	List<ItemStack> myCustomItem = new ArrayList<ItemStack>();
 	List<Material> myDividedItem = new ArrayList<Material>();
+	List<String> myNameSpacedKey = new ArrayList<String>();
+	List<String> myCustomNameItem = new ArrayList<String>();
+
+	public void fileCheck() {
+		File dir = new File("./plugins/MyCustomRecipe");
+		dir.mkdir();
+		File file = new File("./plugins/MyCustomRecipe/recipe.txt");
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
 
 	public void getMyCustomRecipe() {
 		Bukkit.getConsoleSender()
 				.sendMessage("    " + ChatColor.ITALIC + "MyCustomRecipe " + ChatColor.YELLOW + "Available List :: ");
 		List<String> loreString = new ArrayList<String>();
-		
-		// µ¹ ¾ÐÃàÅÛ Ãß°¡
-		loreString.add("¡×fµ¹ 9°³°¡ ¾ÐÃàµÇÀÖ´Â ¸¶¹ýÀÇ µ¹");
-		myCustomItem.add(setItem(new ItemStack(Material.STONE, 1), "¡×e¾ÐÃàµÈ ¡×7µ¹", loreString));
-		myDividedItem.add(Material.STONE);
-		shapelessRecipe.add(new ShapelessRecipe(
-				new NamespacedKey(CustomRecipe, "compressedstone"), myCustomItem.get(myCustomItem.size() - 1))
-				.addIngredient(9, myDividedItem.get(myDividedItem.size() - 1)));
-		Bukkit.getConsoleSender().sendMessage(
-				"    " + ChatColor.DARK_AQUA + "[" + ChatColor.WHITE + "Compressed Stone" + ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " Availabled");
-		loreString.clear();
 
-		// ¾ÆÀÌÅÛ ¼­¹ö¿¡ Ãß°¡
-		for (int i = 0; i < shapelessRecipe.size(); i++)
+		String fileName = "./plugins/MyCustomRecipe/recipe.txt";
+		BufferedReader recipeSearch = null;
+		try {
+			recipeSearch = new BufferedReader(new FileReader(fileName));
+			String line;
+			while ((line = recipeSearch.readLine()) != null) {
+				// íŒŒì¼ì„ 1ì¤„ì”© ì½ì–´ ì•„ì´í…œ ì¶”ê°€í•˜ê¸°
+				String tempKey = line.replace("\"", "").replace("name:", "").trim();
+				line = recipeSearch.readLine();
+				String tempCustomName = line.replace("\"", "").replace("customName:", "").trim();
+				line = recipeSearch.readLine();
+				String tempDisplay = line.replace("\"", "").replace("display:", "").trim();
+				line = recipeSearch.readLine();
+				if (line.trim().equals("lore:")) {
+					line = recipeSearch.readLine();
+					while (!line.contains("material:")) {
+						loreString.add(line.replace("\"", "").trim());
+						line = recipeSearch.readLine();
+					}
+					Material tempMaterial = Material.getMaterial(
+							line.replace("\"", "").replace("\tmaterial:", "").trim());
+					line = recipeSearch.readLine();
+					Material tempResultMaterial = Material.getMaterial(
+							line.replace("\"", "").replace("\tresultItem:", "").trim());
+					myCustomItem.add(setItem(new ItemStack(tempResultMaterial, 1),
+							tempDisplay, loreString));
+					myDividedItem.add(tempMaterial);
+					myNameSpacedKey.add(tempKey);
+					myCustomNameItem.add(tempCustomName);
+					loreString.clear();
+				}
+			}
+		} catch (IOException ioe) {
+			Bukkit.getConsoleSender().sendMessage(ioe.getMessage());
+		} finally {
+			try {
+				if (recipeSearch != null)
+					recipeSearch.close();
+			} catch (Exception e) {
+			}
+		}
+
+		// ì•„ì´í…œ ì„œë²„ì— ì¶”ê°€
+		for (int i = 0; i < myCustomItem.size(); i++) {
+			shapelessRecipe.add(
+					new ShapelessRecipe(new NamespacedKey(CustomRecipe, myNameSpacedKey.get(i)), myCustomItem.get(i))
+							.addIngredient(9, myDividedItem.get(i)));
+			Bukkit.getConsoleSender().sendMessage("    " + ChatColor.DARK_AQUA + "[" + ChatColor.WHITE
+					+ myCustomNameItem.get(i) + ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " Availabled");
 			CustomRecipe.getServer().addRecipe(shapelessRecipe.get(i));
+		}
 	}
 
 	private ItemStack setItem(ItemStack itemStack, String name, List<String> lore) {
