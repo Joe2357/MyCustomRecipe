@@ -1,5 +1,5 @@
 # My Custom Recipe
-  > Update data : 2020 / 5 / 3
+  > Update date : 2020 / 5 / 4
 
 ## 용도
   > 마인크래프트 수집컨텐츠용 플러그인
@@ -15,14 +15,42 @@
   - **Spigot 1.15.2**  
   ![Plugin_Enable](./picture/PluginEnable.png)
 
-## 추가된 아이템
-  1. 압축된 돌
+## 아이템 추가
+  - 파일 입출력을 적용하여 **더 많은 커스텀 조합법 추가 가능**
+### 추가 방법
+  - 플러그인을 적용하여 나오는 MyCustomRecipe의 recipe.txt 파일을 수정하여 조합법 추가
+### recipe.txt
+  - 파일 입력 예시  
+  ```
+  name: "compressedstone"
+	customName: "Compressed Stone"
+	display: "§e압축된 §7돌"
+	lore:
+		"§f돌 9개가 압축되있는 마법의 돌"
+	material: STONE
+	resultItem: STONE
+  ```
+  - 파일 타입 : **ShapelessRecipe**
+  - 기본 추정 : **같은 재료 9개**를 이용한 *ShapelessRecipe*를 이용하여 *CustomItem* 제작
+  - Key
+    1. name: => 커스텀 조합법의 *Key* 값
+    2. customName: => 적용된 후 버킷에 나오는 *이름* 값
+    3. display: => 게임 내에서의 아이템 *이름* 값
+    4. lore: => 게임 내에서의 아이템 *설명* 값
+      - 다음 key값이 나오기 전까지 **계속해서 설명을 넣을 수 있음**
+    5. material: => 아이템을 조합하기 위해 사용하는 재료의 *아이템* 값
+    6. resultItem: => 커스텀 아이템의 *아이템* 값
 
 ## 버전
+### Version 1.1
+  - [**-**] 압축된 돌 레시피 제거
+  - [**+**] 파일 입출력 추가 ( 더 많은 커스텀 조합법 추가 가능 )
+  - [**+**] 플러그인 리로드 명령어 추가  
+    - */recipeReload* :: *recipe.txt* 파일을 리로드합니다
 ### Version 1.0
-  - 플러그인 서버에 적용
-  - 압축된 돌 레시피 추가
-  - 아이템 분해방법 추가
+  - [**+**] 플러그인 서버에 적용
+  - [**+**] 압축된 돌 레시피 추가
+  - [**+**] 아이템 분해방법 추가
 
 ## 수정일
-  > 2020 / 5 / 3
+  > 2020 / 5 / 4
