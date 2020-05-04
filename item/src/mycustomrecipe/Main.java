@@ -11,9 +11,12 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		enableMessage();
 		Recipe myRecipe = new Recipe(this);
-		myRecipe.getMyCustomRecipe();
 		Divide myDivide = new Divide(this, myRecipe);
+		UsingCommand myUsingCommand = new UsingCommand(myRecipe);
+		getCommand("recipeReload").setExecutor(myUsingCommand);
 		myDivide.unused();
+		myRecipe.fileCheck();
+		myRecipe.getMyCustomRecipe();
 	}
 
 	@Override
@@ -25,8 +28,8 @@ public class Main extends JavaPlugin {
 		PluginDescriptionFile pdFile = this.getDescription();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "----------------------------------------");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "MCMPS" + ChatColor.DARK_AQUA
-				+ "]" + ChatColor.WHITE + " ÇÃ·¯±×ÀÎÀÌ È°¼ºÈ­µÇ¾ú½À´Ï´Ù.");
-		Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "ÇÃ·¯±×ÀÎ ÀÌ¸§ : " + ChatColor.WHITE + pdFile.getName());
+				+ "]" + ChatColor.WHITE + " í”ŒëŸ¬ê·¸ì¸ì´ í™œì„±í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
+		Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "í”ŒëŸ¬ê·¸ì¸ ì´ë¦„ : " + ChatColor.WHITE + pdFile.getName());
 		Bukkit.getConsoleSender()
 				.sendMessage(ChatColor.RED + "Version : " + ChatColor.WHITE + "v" + pdFile.getVersion());
 		Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "----------------------------------------");
@@ -35,7 +38,7 @@ public class Main extends JavaPlugin {
 	private void disableMessage() {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "----------------------------------------");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "MCMPS" + ChatColor.DARK_AQUA
-				+ "]" + ChatColor.WHITE + " ÇÃ·¯±×ÀÎÀÌ ºñÈ°¼ºÈ­µÇ¾ú½À´Ï´Ù.");
+				+ "]" + ChatColor.WHITE + " í”ŒëŸ¬ê·¸ì¸ì´ ë¹„í™œì„±í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "----------------------------------------");
 	}
 }
