@@ -1,5 +1,9 @@
 package mycustomrecipe;
 
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,30 +12,25 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class Divide implements Listener {
-	private final Main myMain;
-	private final Recipe myRecipe;
 
-	public Divide(Main inst1, Recipe inst2) {
-		myMain = inst1;
-		myRecipe = inst2;
-		myMain.getServer().getPluginManager().registerEvents(this, myMain);
-	}
-	
-	public void unused() {
-		return;
+	public Divide(Main inst) {
+		Bukkit.getPluginManager().registerEvents(this, inst);
 	}
 
 	@EventHandler
-	public void rightClick1(PlayerInteractEvent event) {
+	public void divideItem(PlayerInteractEvent event) {
 		Player executor = event.getPlayer();
 		Action action = event.getAction();
-		ItemStack usingItem = executor.getInventory().getItemInMainHand();
 		if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
-			for (int i = 0; i < myRecipe.myCustomItem.size(); i++) {
-				if (usingItem != null && usingItem.equals(myRecipe.myCustomItem.get(i))) {
+			ItemStack usingItem = executor.getInventory().getItemInMainHand().clone();
+			usingItem.setAmount(1);
+			List<ItemStack> myCustomItemList = Recipe.getMyCustomItem();
+			List<Material> myDivideItemList = Recipe.getMyDivideItem();
+			for (int i = 0; i < myCustomItemList.size(); i++) {
+				if (usingItem != null && usingItem.equals(myCustomItemList.get(i))) {
 					event.setCancelled(true);
 					executor.getInventory().removeItem(usingItem);
-					executor.getInventory().addItem(new ItemStack(myRecipe.myDividedItem.get(i), 9));
+					executor.getInventory().addItem(new ItemStack(myDivideItemList.get(i), 9));
 				}
 			}
 		}

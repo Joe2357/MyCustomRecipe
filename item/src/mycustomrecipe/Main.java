@@ -10,13 +10,10 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		enableMessage();
-		Recipe myRecipe = new Recipe(this);
-		Divide myDivide = new Divide(this, myRecipe);
-		UsingCommand myUsingCommand = new UsingCommand(myRecipe);
-		getCommand("recipeReload").setExecutor(myUsingCommand);
-		myDivide.unused();
-		myRecipe.fileCheck();
-		myRecipe.getMyCustomRecipe();
+		getCommand("recipe").setExecutor(new UsingCommand());
+		new Recipe(this);
+		new Divide(this);
+		Recipe.getMyCustomRecipe();
 	}
 
 	@Override

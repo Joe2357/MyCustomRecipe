@@ -1,10 +1,24 @@
 name: "MyCustomRecipe"
-version: 1.1
+version: 1.2
 author: Joe2357
 description: "Using only my wild survival, make my custom item"
 
 main: mycustomrecipe.Main
 
 commands:
-    recipeReload:
-        description: "Reload custom recipe"
+  recipe:
+    description: "Commands of MyCustomRecipe"
+    usage: |+
+          '/<command> reload'    to reload all custom recipes
+          '/<command> list'    to print all result items
+    permission:  mycustomrecipe.recipe
+    permission-message: "You do not have permission mycustomrecipe.recipe"
+        
+permissions:
+  mycustomrecipe.*:
+    description: "Gives access to all MyCustomRecipe commands"
+    children:
+      mycustomrecipe.recipe: true
+  mycustomrecipe.recipe:
+    description: Allows you to reload custom recipe
+    default: op
