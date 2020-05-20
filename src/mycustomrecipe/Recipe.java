@@ -35,7 +35,7 @@ public class Recipe {
 	public void fileCheck() {
 		new File("./plugins/MyCustomRecipe").mkdir();
 		File file = new File("./plugins/MyCustomRecipe/recipe.txt");
-		if (!file.exists()) { // í…ìŠ¤íŠ¸ íŒŒì¼ì´ ì—†ë‹¤ë©´ ìƒì„±í•˜ëŠ” ë°©ë²•
+		if (!file.exists()) { // ÅØ½ºÆ® ÆÄÀÏÀÌ ¾ø´Ù¸é »ı¼ºÇÏ´Â ¹æ¹ı
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
@@ -66,7 +66,7 @@ public class Recipe {
 		try {
 			recipeSearch = new BufferedReader(new FileReader(fileName));
 			String line;
-			// íŒŒì¼ì„ 1ì¤„ì”© ì½ì–´ ì•„ì´í…œ ì¶”ê°€í•˜ê¸°
+			// ÆÄÀÏÀ» 1ÁÙ¾¿ ÀĞ¾î ¾ÆÀÌÅÛ Ãß°¡ÇÏ±â
 			while ((line = recipeSearch.readLine()) != null) {
 				if (!line.contains("name:"))
 					continue;
@@ -82,18 +82,17 @@ public class Recipe {
 						loreString.add(line.replace("\"", "").trim());
 						line = recipeSearch.readLine();
 					}
-					Material tempMaterial = Material
-							.getMaterial(line.replace("\"", "").replace("\tmaterial:", "").trim());
-					line = recipeSearch.readLine();
-					Material tempResultMaterial = Material
-							.getMaterial(line.replace("\"", "").replace("\tresultItem:", "").trim());
-					getMyCustomItem().add(setItem(new ItemStack(tempResultMaterial, 1), tempDisplay, loreString));
-					myDividedItem.add(tempMaterial);
-					myNameSpacedKey.add(tempKey);
-					myCustomNameItem.add(tempCustomName);
-					myCustomDisplayItem.add(tempDisplay);
-					loreString.clear();
 				}
+				Material tempMaterial = Material.getMaterial(line.replace("\"", "").replace("\tmaterial:", "").trim());
+				line = recipeSearch.readLine();
+				Material tempResultMaterial = Material
+						.getMaterial(line.replace("\"", "").replace("\tresultItem:", "").trim());
+				getMyCustomItem().add(setItem(new ItemStack(tempResultMaterial, 1), tempDisplay, loreString));
+				myDividedItem.add(tempMaterial);
+				myNameSpacedKey.add(tempKey);
+				myCustomNameItem.add(tempCustomName);
+				myCustomDisplayItem.add(tempDisplay);
+				loreString.clear();
 			}
 		} catch (IOException ioe) {
 			Bukkit.getConsoleSender().sendMessage(ioe.getMessage());
@@ -105,7 +104,7 @@ public class Recipe {
 			}
 		}
 
-		// ì•„ì´í…œ ì„œë²„ì— ì¶”ê°€
+		// ¾ÆÀÌÅÛ ¼­¹ö¿¡ Ãß°¡
 		for (int i = 0; i < getMyCustomItem().size(); i++) {
 			shapelessRecipe.add(
 					new ShapelessRecipe(new NamespacedKey(myMain, myNameSpacedKey.get(i)), getMyCustomItem().get(i))

@@ -5,6 +5,7 @@ name: "compressedstone"
 		"§f돌 9개가 압축되있는 마법의 돌"
 	material: STONE
 	resultItem: STONE
+
 name: "compressedcobblestone"
 	customName: "Compressed Cobbletone"
 	display: "§e압축된 §7조약돌"
@@ -12,6 +13,7 @@ name: "compressedcobblestone"
 		"§f조약돌 9개가 압축되있는 마법의 돌"
 	material: COBBLESTONE
 	resultItem: COBBLESTONE
+
 name: "compresseddirt"
 	customName: "Compressed Dirt"
 	display: "§e압축된 §2흙"
