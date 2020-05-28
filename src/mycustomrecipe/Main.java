@@ -11,6 +11,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		enableMessage();
 		getCommand("recipe").setExecutor(new UsingCommand());
+		getCommand("recipe").setTabCompleter(new CommandTabCompletion());
 		new Recipe(this);
 		new Divide(this);
 		Recipe.getMyCustomRecipe();
