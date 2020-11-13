@@ -17,10 +17,10 @@ public class UsingCommand implements CommandExecutor {
 			} else if (args[0].equals("reload")) {
 				Recipe.getMyCustomRecipe();
 				sender.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "MyCustomRecipe" + ChatColor.DARK_AQUA
-						+ "] " + ChatColor.WHITE + "·¹½ÃÇÇ¸¦ ´Ù½Ã ºÒ·¯¿Ô½À´Ï´Ù!");
+						+ "] " + ChatColor.WHITE + "ë ˆì‹œí”¼ë¥¼ ë‹¤ì‹œ ë¶ˆëŸ¬ì™”ìŠµë‹ˆë‹¤!");
 				return true;
 			} else if (args[0].equals("list")) {
-				sender.sendMessage("¡×fMyCustomRecipe ¡×aAvailable List ::");
+				sender.sendMessage("Â§fMyCustomRecipe Â§aAvailable List ::");
 				for (String temp : Recipe.getmyCustomDisplayItem())
 					sender.sendMessage("    " + temp);
 				return true;
@@ -31,10 +31,10 @@ public class UsingCommand implements CommandExecutor {
 
 	public static void getHelp(Player user) {
 		user.sendMessage(ChatColor.WHITE + "------------------------------" + "\n" + ChatColor.DARK_AQUA + "["
-				+ ChatColor.AQUA + "MyCustomRecipe" + ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " ¸í·É¾î µµ¿ò¸»" + "\n"
-				+ ChatColor.YELLOW + "    /recipe" + ChatColor.WHITE + " :: µµ¿ò¸»À» ³ªÅ¸³À´Ï´Ù" + "\n" + ChatColor.YELLOW
-				+ "    /recipe reload" + ChatColor.WHITE + " :: recipe.txt ÆÄÀÏÀ» ¸®·ÎµåÇÕ´Ï´Ù" + "\n" + ChatColor.YELLOW + "    /recipe list "
-				+ ChatColor.WHITE + " :: Àû¿ëµÈ Ä¿½ºÅÒ¾ÆÀÌÅÛÀ» È®ÀÎÇÕ´Ï´Ù" + "\n" + ChatColor.WHITE
+				+ ChatColor.AQUA + "MyCustomRecipe" + ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " ëª…ë ¹ì–´ ë„ì›€ë§" + "\n"
+				+ ChatColor.YELLOW + "    /recipe" + ChatColor.WHITE + " :: ë„ì›€ë§ì„ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤" + "\n" + ChatColor.YELLOW
+				+ "    /recipe reload" + ChatColor.WHITE + " :: recipe.txt íŒŒì¼ì„ ë¦¬ë¡œë“œí•©ë‹ˆë‹¤" + "\n" + ChatColor.YELLOW
+				+ "    /recipe list " + ChatColor.WHITE + " :: ì ìš©ëœ ì»¤ìŠ¤í…€ì•„ì´í…œì„ í™•ì¸í•©ë‹ˆë‹¤" + "\n" + ChatColor.WHITE
 				+ "------------------------------\n");
 	}
 }

@@ -5,7 +5,7 @@ name: "compressedstone"
 		"§f돌 9개가 압축되있는 마법의 돌"
 	material: STONE
 	resultItem: STONE
-
+	
 name: "compressedcobblestone"
 	customName: "Compressed Cobbletone"
 	display: "§e압축된 §7조약돌"
@@ -13,7 +13,7 @@ name: "compressedcobblestone"
 		"§f조약돌 9개가 압축되있는 마법의 돌"
 	material: COBBLESTONE
 	resultItem: COBBLESTONE
-
+	
 name: "compresseddirt"
 	customName: "Compressed Dirt"
 	display: "§e압축된 §2흙"
@@ -21,3 +21,11 @@ name: "compresseddirt"
 		"§f흙 9개가 압축되있는 마법의 흙"
 	material: DIRT
 	resultItem: DIRT
+
+name: "compressedcoalblock"
+	customName: "Compressed Coal Block"
+	display: "§e압축된 §0석탄 블럭"
+	lore:
+		"§f석탄 블럭 9개가 압축되있는 마법의 석탄 블럭"
+	material: COAL_BLOCK
+	resultItem: COAL_BLOCK
